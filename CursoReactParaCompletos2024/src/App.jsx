@@ -59,7 +59,13 @@ function App() {
                 }
             );
             const data = await response.json();
-            setTasks(data);
+            console.log("Dados recebidos da API:", data); // <-- Adicione esta linha
+            // Adiciona uma descrição padrão se não existir
+            const tasksWithDescription = data.map((task) => ({
+                ...task,
+                description: task.description || "Sem descrição disponível.",
+            }));
+            setTasks(tasksWithDescription);
         }
         fetchTasks();
     }, []);
